@@ -21,41 +21,44 @@ public class User {
         return null;
     }
 
-    public Object getPassword() {
-        return null;
-    }
+public String getPassword() {
+    return password;
+}
 
-    public Object getEmail() {
-        return null;
-    }
+public String getEmail() {
+    return email;
+}
 
-    public Object getFullName() {
-        return null;
-    }
+public String getFullName() {
+    return fullName;
+}
 
-    public Object getPhone() {
-        return null;
-    }
+public String getPhone() {
+    return phone;
+}
 
-    public Object getAddress() {
-        return null;
-    }
+public String getAddress() {
+    return address;
+}
 
-    public void setAddress(Object address) {
-    }
+public void setAddress(String address) {
+    this.address = address;
+}
 
-    public void setPassword(Object password) {
-    }
+public void setPassword(String password) {
+    this.password = password;
+}
 
-    public void setEmail(Object email) {
-    }
+public void setEmail(String email) {
+    this.email = email;
+}
 
-    public void setFullName(Object fullName) {
-    }
+public void setFullName(String fullName) {
+    this.fullName = fullName;
+}
 
-    public void setPhone(Object phone) {
-    }
+public void setPhone(String phone) {
+    this.phone = phone;
+}
 
-    public void setUsername(User username) {
-    }
 }
