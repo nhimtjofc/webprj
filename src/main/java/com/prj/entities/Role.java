@@ -11,7 +11,7 @@ public class Role {
 
     private String roleName;
 
-    public Object getRoleName() {
+    public String getRoleName() {
         return null;
     }
 
