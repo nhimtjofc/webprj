@@ -24,7 +24,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    // Thêm người dùng mới
+    // Thêm người dùng
     public User addUser(User user) {
         return userRepository.save(user);
     }
@@ -45,6 +45,11 @@ public class UserService {
     // Xóa người dùng
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    // Tìm người dùng bằng email
+    public Optional<User> findByEmail(String email) {
+        return Optional.ofNullable(userRepository.findByUsername(email));
     }
 }
 

@@ -1,5 +1,7 @@
 package com.prj.controller;
 
+import com.prj.dto.ApiRequest;
+import com.prj.dto.ApiResponse;
 import com.prj.entities.User;
 import com.prj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,23 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    // Đăng nhập API
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse> login(@RequestBody ApiRequest request) {
+        Optional<User> user = userService.findByEmail(request.getEmail());
+
+        if (!user.isPresent()) {
+            // Trường hợp email sai
+            return new ResponseEntity<>(new ApiResponse(1001, "email wrong"), HttpStatus.BAD_REQUEST);
+        }
+
+        if (!user.get().getPassword().equals(request.getPassword())) {
+            // Trường hợp password sai
+            return new ResponseEntity<>(new ApiResponse(1001, "password wrong"), HttpStatus.BAD_REQUEST);
+        }
+
+        // Đăng nhập thành công
+        return new ResponseEntity<>(new ApiResponse(1000, "login successful"), HttpStatus.OK);
     }
 }
