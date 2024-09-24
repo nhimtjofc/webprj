@@ -1,38 +1,40 @@
 package com.prj.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
 
-    @Setter
-    @Getter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
-
+    @Column(name = "Username")
     private String username;
-    @Setter
-    @Getter
+
+    @Column(name = "Password")
     private String password;
-    @Setter
-    @Getter
+
+    @Column(name = "Email")
     private String email;
-    @Setter
-    @Getter
+
+    @Column(name = "Full name")
     private String fullName;
-    @Setter
-    @Getter
+
+    @Column(name = "Phone number")
     private String phone;
-    @Setter
-    @Getter
+
+    @Column(name = "Address")
     private String address;
 
     public User getUsername() {
