@@ -4,7 +4,6 @@ import com.prj.dto.ApiRequest;
 import com.prj.dto.ApiResponse;
 import com.prj.entities.User;
 import com.prj.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +15,12 @@ import java.util.Optional;
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
@@ -27,7 +30,7 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         Optional<User> user = userService.getUserById(id);
         return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseThrow(() -> new ResourceNotFound("This user id " + id + " doesn't exist"));
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @PostMapping
     public ResponseEntity<User> addUser(@RequestBody User user) {
@@ -38,7 +41,7 @@ public class UserController {
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
         Optional<User> updatedUser = userService.updateUser(id, userDetails);
         return updatedUser.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseThrow(() -> new ResourceNotFound("This user id " + id + " doesn't exist"));
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
@@ -50,10 +53,9 @@ public class UserController {
     public ResponseEntity<ApiResponse> login(@RequestBody ApiRequest request) {
         Optional<User> user = userService.findByEmail(request.getEmail());
 
-        if (!user.isPresent()) {
-            // Trường hợp email sai
+        // Trường hợp email sai
+        if (user.isEmpty())
             return new ResponseEntity<>(new ApiResponse(1001, "email wrong"), HttpStatus.BAD_REQUEST);
-        }
 
         if (!user.get().getPassword().equals(request.getPassword())) {
             // Trường hợp password sai
