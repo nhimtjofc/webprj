@@ -2,8 +2,12 @@ package com.prj.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
 @Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "user_roles")
 public class UserRole {
@@ -22,18 +26,6 @@ public class UserRole {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public void setUserRoleId(Long userRoleId) {
-        this.userRoleId = userRoleId;
-    }
 }
 
 
