@@ -29,7 +29,7 @@ public class RoleController {
     public ResponseEntity<Role> getRoleById(@PathVariable Long id) {
         Optional<Role> role = roleService.getRoleById(id);
         return role.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResourceNotFound("This role id " + id + " doesn't exist"));
     }
 
     // Thêm vai trò mới
@@ -44,7 +44,7 @@ public class RoleController {
     public ResponseEntity<Role> updateRole(@PathVariable Long id, @RequestBody Role roleDetails) {
         Optional<Role> updatedRole = roleService.updateRole(id, roleDetails);
         return updatedRole.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResourceNotFound("This role id " + id + " doesn't exist"));
     }
 
     // Xóa vai trò
