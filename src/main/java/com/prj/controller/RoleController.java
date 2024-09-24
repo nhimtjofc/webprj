@@ -2,7 +2,6 @@ package com.prj.controller;
 
 import com.prj.entities.Role;
 import com.prj.service.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +13,11 @@ import java.util.Optional;
 @RequestMapping("/api/roles")
 public class RoleController {
 
-    @Autowired
-    private RoleService roleService;
+    private final RoleService roleService;
+
+    public RoleController(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
     // Lấy tất cả các vai trò
     @GetMapping
@@ -29,7 +31,7 @@ public class RoleController {
     public ResponseEntity<Role> getRoleById(@PathVariable Long id) {
         Optional<Role> role = roleService.getRoleById(id);
         return role.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseThrow(() -> new ResourceNotFound("This role id " + id + " doesn't exist"));
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // Thêm vai trò mới
@@ -44,7 +46,7 @@ public class RoleController {
     public ResponseEntity<Role> updateRole(@PathVariable Long id, @RequestBody Role roleDetails) {
         Optional<Role> updatedRole = roleService.updateRole(id, roleDetails);
         return updatedRole.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseThrow(() -> new ResourceNotFound("This role id " + id + " doesn't exist"));
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // Xóa vai trò
