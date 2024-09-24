@@ -1,66 +1,73 @@
 package com.prj.controller;
 
-import com.prj.dto.ApiRequest;
-import com.prj.dto.ApiResponse;
-import com.prj.entities.User;
-import com.prj.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Optional;
+import com.prj.dto.UserCoursedto;
+import com.prj.entities.UserCourse;
+import com.prj.service.UserCourseService;
 
+import lombok.AllArgsConstructor;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
+
+@AllArgsConstructor
 @RestController
-@RequestMapping("/api/users")
-public class UserController {
+@RequestMapping("/api/user-course")
+public class UserCourseController {
+    private UserCourseService usercourseService;
 
-    @Autowired
-    private UserService userService;
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+    @PostMapping("/create")
+    public ResponseEntity<UserCoursedto> createUserCourse(@RequestBody UserCoursedto usercoursedto)
+    {
+       UserCoursedto SavedUserCourse = usercourseService.addUserCourse(usercoursedto);
+       return new ResponseEntity<>(SavedUserCourse, HttpStatus.CREATED);
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        Optional<User> user = userService.getUserById(id);
-        return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseThrow(() -> new ResourceNotFound("This user id " + id + " doesn't exist"));
+    public ResponseEntity<UserCoursedto> getUserCourseById(@PathVariable("id") Long usercourseID)
+    {
+      UserCoursedto usercoursedto = usercourseService.getUserCourseById(usercourseID);
+      if (usercoursedto != null) {
+         return ResponseEntity.ok(usercoursedto);
+      } else {
+         return ResponseEntity.notFound().build();
+      }
     }
-    @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user) {
-        User newUser = userService.addUser(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
-        Optional<User> updatedUser = userService.updateUser(id, userDetails);
-        return updatedUser.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseThrow(() -> new ResourceNotFound("This user id " + id + " doesn't exist"));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-    // Đăng nhập API
-    @PostMapping("/login")
-    public ResponseEntity<ApiResponse> login(@RequestBody ApiRequest request) {
-        Optional<User> user = userService.findByEmail(request.getEmail());
 
-        if (!user.isPresent()) {
-            // Trường hợp email sai
-            return new ResponseEntity<>(new ApiResponse(1001, "email wrong"), HttpStatus.BAD_REQUEST);
-        }
+    @GetMapping
+    public ResponseEntity<List<UserCoursedto>> getAllUserCourses()
+    {
+       List<UserCoursedto> usercourses = usercourseService.getAllUserCourses();
+       return ResponseEntity.ok(usercourses);
+    }
 
-        if (!user.get().getPassword().equals(request.getPassword())) {
-            // Trường hợp password sai
-            return new ResponseEntity<>(new ApiResponse(1001, "password wrong"), HttpStatus.BAD_REQUEST);
-        }
+    @PutMapping("{id}")
+    public ResponseEntity<UserCoursedto> updateUserCourse (@PathVariable("id") Long usercourseID, @RequestBody UserCoursedto updatedUserCourse) {
+         UserCoursedto usercoursedto = usercourseService.updateUserCourse(usercourseID, updatedUserCourse);
+         if (usercoursedto != null) {
+            return ResponseEntity.ok(usercoursedto);
+         } else {
+            return ResponseEntity.notFound().build();
+         }
+        
+    }
 
-        // Đăng nhập thành công
-        return new ResponseEntity<>(new ApiResponse(1000, "login successful"), HttpStatus.OK);
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteUserCourse(@PathVariable("id") Long usercourseID)
+    {
+         usercourseService.deleteUserCourse(usercourseID);
+         return ResponseEntity.noContent().build();
     }
 }
