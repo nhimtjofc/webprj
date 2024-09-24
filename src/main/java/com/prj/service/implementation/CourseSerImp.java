@@ -9,7 +9,7 @@ import com.prj.dto.Coursedto;
 import com.prj.entities.Course;
 import com.prj.exception.ResourceNotFound;
 import com.prj.mapper.CourseMapper;
-import com.prj.repository.CourseRepository;
+import com.prj.repositories.CourseRepository;
 import com.prj.service.CourseService;
 
 import lombok.AllArgsConstructor;
