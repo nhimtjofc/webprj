@@ -1,0 +1,97 @@
+{
+  "id": 1,
+  "courseName": "Tiếng Anh Giao Tiếp Cơ Bản",
+  "courseContent": [
+    {
+      "session": 1,
+      "title": "Giới thiệu bản thân và người khác",
+      "details": [
+        "Cách chào hỏi, tự giới thiệu tên tuổi, nghề nghiệp.",
+        "Cách hỏi thông tin cơ bản của người khác như tên, công việc, quê quán.",
+        "Luyện tập theo cặp trong các tình huống giao tiếp thực tế."
+      ]
+    },
+    {
+      "session": 2,
+      "title": "Giao tiếp trong các tình huống hàng ngày",
+      "details": [
+        "Giao tiếp khi mua sắm: Cách hỏi giá, mặc cả, thanh toán.",
+        "Giao tiếp khi đi nhà hàng: Gọi món, hỏi về thực đơn.",
+        "Các mẫu câu thông dụng trong giao tiếp hàng ngày."
+      ]
+    },
+    {
+      "session": 3,
+      "title": "Giao tiếp trong công việc",
+      "details": [
+        "Cách giới thiệu về công việc hiện tại.",
+        "Giao tiếp trong các cuộc họp: Đưa ra ý kiến, đồng ý, phản đối.",
+        "Mẫu câu sử dụng khi thảo luận công việc với đồng nghiệp, cấp trên."
+      ]
+    },
+    {
+      "session": 4,
+      "title": "Phát âm chuẩn tiếng Anh",
+      "details": [
+        "Cách phát âm các nguyên âm và phụ âm cơ bản trong tiếng Anh.",
+        "Luyện tập phát âm qua các bài tập nói và đọc.",
+        "Các lỗi phát âm thường gặp ở người học tiếng Anh và cách khắc phục."
+      ]
+    },
+    {
+      "session": 5,
+      "title": "Giao tiếp khi đi du lịch",
+      "details": [
+        "Giao tiếp tại sân bay: Làm thủ tục, hỏi đường, thông tin chuyến bay.",
+        "Giao tiếp khi đến khách sạn: Đặt phòng, yêu cầu dịch vụ.",
+        "Cách hỏi thông tin khi đi tham quan, du lịch."
+      ]
+    },
+    {
+      "session": 6,
+      "title": "Giao tiếp qua điện thoại",
+      "details": [
+        "Các mẫu câu để bắt đầu và kết thúc cuộc gọi.",
+        "Cách đặt lịch hẹn, yêu cầu thông tin qua điện thoại.",
+        "Luyện nghe và thực hành các cuộc hội thoại qua điện thoại."
+      ]
+    },
+    {
+      "session": 7,
+      "title": "Giao tiếp trong tình huống khẩn cấp",
+      "details": [
+        "Cách xin trợ giúp khi gặp khó khăn.",
+        "Các mẫu câu thông dụng khi giao tiếp với cảnh sát, nhân viên y tế.",
+        "Tình huống mô phỏng để học viên thực hành."
+      ]
+    },
+    {
+      "session": 8,
+      "title": "Ôn tập và kiểm tra",
+      "details": [
+        "Ôn tập lại tất cả các chủ đề đã học.",
+        "Thực hành tình huống giao tiếp với giảng viên và bạn học.",
+        "Kiểm tra cuối khóa, đánh giá kỹ năng giao tiếp của học viên."
+      ]
+    }
+  ],
+  "objective": "Mục tiêu của khóa học 'Tiếng Anh Giao Tiếp Cơ Bản' là giúp học viên tự tin giao tiếp tiếng Anh trong các tình huống hàng ngày và công việc, cải thiện phát âm, từ vựng, kỹ năng nghe hiểu, và xử lý các tình huống khẩn cấp, đồng thời phát triển khả năng giao tiếp qua điện thoại và trong môi trường công việc quốc tế.",
+  "duration": "2 tháng",
+  "tuitionFee": "2.000.000 VND",
+  "learningMethod": "Học qua tình huống thực tế, học nhóm",
+  "certificate": {
+    "issued": true,
+    "details": "Sau khi hoàn thành khóa học 'Tiếng Anh Giao Tiếp Cơ Bản', học viên sẽ nhận được chứng chỉ xác nhận đã hoàn thành khóa học, với nội dung ghi nhận thời lượng học, các kỹ năng đạt được, và xếp loại kết quả dựa trên quá trình học tập cũng như bài kiểm tra cuối khóa."
+  },
+  "startTime": "YYYY-MM-DD",
+  "endTime": "YYYY-MM-DD",
+  "schedule": ["Mon", "Tue", "Thur"],
+  "likes": 150,
+  "image": "",
+  "numberOfStudents": 30,
+  "object": "Người có nền tảng cơ bản",
+  "lecturer": {
+    "name": "Nguyễn Tấn Dũng",
+    "id": "..."
+  }
+}
